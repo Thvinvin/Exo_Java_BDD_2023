@@ -92,8 +92,8 @@ pluvieux</p>
 Exemple : L'hiver sera pluvieux</br>
 Lhvrsr lvex</p>
 
-<h2>Exercice 5 : La phrase en verlant</h2>
-<p>Ecrire le programme afin d'afficher le texte en verlant</p>
+<h2>Exercice 5 : La phrase en verlan</h2>
+<p>Ecrire le programme afin d'afficher le texte en verlan</p>
 
 <%-- Affichage du texte en verlan --%>
 <%
@@ -105,6 +105,7 @@ Lhvrsr lvex</p>
        out.print(" ");
    }
 %>
+
 
 Exemple : L'hiver sera pluvieux</br>
 xueivulp ares revih'l</p>
