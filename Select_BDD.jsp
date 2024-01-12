@@ -57,7 +57,6 @@
     // Fermer les ressources
     films2000to2015Rs.close();
     films2000to2015Pstmt.close();
-    conn.close();
     %>
 
     <h2>Exercice 2 : Année de recherche</h2>
@@ -122,5 +121,10 @@ if (searchYearParam != null && !searchYearParam.isEmpty()) {
     <br>
     <input type="submit" value="Ajouter Film">
 </form>
+
+<%
+    conn.close();
+%>
+
 </body>
 </html>
