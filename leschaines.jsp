@@ -51,9 +51,9 @@
 <h2>Exercice 2 : Affichage vertical</h2>
 <p>Ecrire le programme pour afficher le texte en vertical</p>
 
-<%-- Affichage du texte en vertical avec espacement réduit --%>
+<%-- Affichage du texte en vertical --%>
 <% for (int i = 0; i < longueurChaine; i++) { %>
-    <p style="letter-spacing: -1px;"><%= chaine.charAt(i) %></p>
+    <p><%= chaine.charAt(i) %></p>
 <% } %>
 
 
@@ -68,6 +68,16 @@ r</p>
 
 <h2>Exercice 3 : Retour à la ligne</h2>
 <p>La présence d'un espace provoque un retour à la ligne </br>
+
+<h2>Exercice 3 : Retour à la ligne</h2>
+<p>La présence d'un espace provoque un retour à la ligne</p>
+
+<%-- Affichage du texte avec retour à la ligne --%>
+<% String[] mots = chaine.split(" ");
+   for (String mot : mots) { %>
+    <p><%= mot %></p>
+<% } %>
+
 Exemple : L'hiver sera pluvieux</br>
 L'hiver</br>
 sera</br>
