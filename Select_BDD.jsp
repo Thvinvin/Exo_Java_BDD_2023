@@ -19,7 +19,7 @@
         // Établir la connexion
         Connection conn = DriverManager.getConnection(url, user, password);
         // Exemple de requête SQL
-        String sql = "SELECT idFilm, titre, année FROM Film WHERE année >= 2000";
+        String sql = "SELECT idFilm, titre, année FROM Film WHERE année > 2000 AND année < 2015";
         PreparedStatement pstmt = conn.prepareStatement(sql);
         ResultSet rs = pstmt.executeQuery();
 
@@ -41,6 +41,15 @@
 
 <h2>Exercice 1 : Les films entre 2000 et 2015</h2>
 <p>Extraire les films dont l'année est supérieur à l'année 2000 et inférieur à 2015.</p>
+        // Afficher les résultats sous l'exercice 1
+        while (rs.next()) {
+            String colonne1 = rs.getString("idFilm");
+            String colonne2 = rs.getString("titre");
+            String colonne3 = rs.getString("année");
+            // Faites ce que vous voulez avec les données...
+            //Exemple d'affichage de 2 colonnes
+            out.println("id : " + colonne1 + ", titre : " + colonne2 + ", année : " + colonne3 + "</br>");
+        }
 
 <h2>Exercice 2 : Année de recherche</h2>
     <form action="" method="GET">
