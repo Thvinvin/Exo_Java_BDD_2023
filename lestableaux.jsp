@@ -73,31 +73,25 @@
         %>
         <p>La valeur la plus proche de 0 est : <%= plusProcheDeZero %></p>
 
-        <h2>Exercice 7 : La valeur la plus proche de 0 (2° version)</h2>
-<%
-    int plusProcheDeZeroPositif = Integer.MAX_VALUE;
-    int plusProcheDeZeroNegatif = Integer.MIN_VALUE;
+                <h2>Exercice 7 : La valeur la plus proche de 0 (2° version)</h2>
+        <%
+            int plusProcheDeZeroPositif = Integer.MAX_VALUE;
+            int plusProcheDeZeroNegatif = Integer.MIN_VALUE;
 
-    for (String chiffre : tableauDeChiffres) {
-        int valeur = Integer.parseInt(chiffre);
-        if (valeur >= 0 && valeur < plusProcheDeZeroPositif) {
-            plusProcheDeZeroPositif = valeur;
-        } else if (valeur < 0 && valeur > plusProcheDeZeroNegatif) {
-            plusProcheDeZeroNegatif = valeur;
-        }
-    }
+            for (String chiffre : tableauDeChiffres) {
+                int valeur = Integer.parseInt(chiffre);
+                if (valeur >= 0 && valeur < plusProcheDeZeroPositif) {
+                    plusProcheDeZeroPositif = valeur;
+                } else if (valeur < 0 && valeur > plusProcheDeZeroNegatif) {
+                    plusProcheDeZeroNegatif = valeur;
+                }
+            }
 
-    int resultatExercice7;
-    if (plusProcheDeZeroPositif == Integer.MAX_VALUE) {
-        resultatExercice7 = plusProcheDeZeroNegatif;
-    } else if (plusProcheDeZeroNegatif == Integer.MIN_VALUE) {
-        resultatExercice7 = plusProcheDeZeroPositif;
-    } else {
-        resultatExercice7 = (Math.abs(plusProcheDeZeroPositif) <= Math.abs(plusProcheDeZeroNegatif)) ? plusProcheDeZeroPositif : plusProcheDeZeroNegatif;
-    }
-%>
-<p>La valeur la plus proche de 0 (2° version) est : <%= resultatExercice7 %></p>
+            int resultatExercice7 = (Math.abs(plusProcheDeZeroPositif) <= Math.abs(plusProcheDeZeroNegatif)) ? plusProcheDeZeroPositif : plusProcheDeZeroNegatif;
+        %>
+        <p>La valeur la plus proche de 0 (2° version) est : <%= resultatExercice7 %></p>
 
+    <% } %>
 
     <p><a href="index.html">Retour au sommaire</a></p>
 </body>
