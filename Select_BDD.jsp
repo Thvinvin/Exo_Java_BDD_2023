@@ -99,26 +99,54 @@ if (searchYearParam != null && !searchYearParam.isEmpty()) {
 %>
 
 <h2>Exercice 3 : Modification du titre du film</h2>
-<p>Créer un fichier permettant de modifier le titre d'un film sur la base de son ID (ID choisi par l'utilisateur)</p>
+<p>Choisissez un film à modifier :</p>
+
+<form action="" method="POST">
+    <label for="filmId">ID du film à modifier :</label>
+    <select name="filmId" id="filmId">
+        <% 
+            // Retrieve the list of films for the dropdown
+            String filmListSql = "SELECT idFilm, titre FROM Film";
+            PreparedStatement filmListPstmt = conn.prepareStatement(filmListSql);
+            ResultSet filmListRs = filmListPstmt.executeQuery();
+
+            while (filmListRs.next()) {
+                int filmId = filmListRs.getInt("idFilm");
+                String filmTitle = filmListRs.getString("titre");
+                out.println("<option value=\"" + filmId + "\">" + filmTitle + "</option>");
+            }
+
+            filmListRs.close();
+            filmListPstmt.close();
+        %>
+    </select>
+    <br>
+
+    <label for="newTitle">Nouveau titre :</label>
+    <input type="text" id="newTitle" name="newTitle" required>
+    <br>
+
+    <input type="submit" value="Modifier Titre">
+</form>
 
 <%
 // Exercice 3 : Modification du titre du film
-String filmIdParam = request.getParameter("filmId");
+String selectedFilmIdParam = request.getParameter("filmId");
 String newTitleParam = request.getParameter("newTitle");
 
-if (filmIdParam != null && newTitleParam != null && !filmIdParam.isEmpty() && !newTitleParam.isEmpty()) {
+if (selectedFilmIdParam != null && newTitleParam != null && !selectedFilmIdParam.isEmpty() && !newTitleParam.isEmpty()) {
     try {
-        int filmId = Integer.parseInt(filmIdParam);
+        int selectedFilmId = Integer.parseInt(selectedFilmIdParam);
         String updateSql = "UPDATE Film SET titre = ? WHERE idFilm = ?";
         PreparedStatement updatePstmt = conn.prepareStatement(updateSql);
         updatePstmt.setString(1, newTitleParam);
-        updatePstmt.setInt(2, filmId);
+        updatePstmt.setInt(2, selectedFilmId);
         int rowsUpdated = updatePstmt.executeUpdate();
 
         if (rowsUpdated > 0) {
-            out.println("<p>Titre du film avec l'ID " + filmId + " modifié avec succès.</p>");
+            out.println("<p>Titre du film avec l'ID " + selectedFilmId + " modifié avec succès.</p>");
         } else {
-            out.println("<p>Aucun film trouvé avec l'ID " + filmId + ".</p>");
+            out.println("<p>Aucun film trouvé avec l'ID " + selectedFilmId + ".</p>");
         }
 
         updatePstmt.close();
@@ -129,7 +157,6 @@ if (filmIdParam != null && newTitleParam != null && !filmIdParam.isEmpty() && !n
     }
 }
 %>
-
 <h2>Exercice 4 : La valeur maximum</h2>
 <p>Créer un formulaire pour saisir un nouveau film dans la base de données</p>
 <form action="" method="POST">
