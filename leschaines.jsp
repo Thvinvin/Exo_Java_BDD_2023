@@ -64,9 +64,14 @@
 
 <h2>Exercice 4 : Afficher une lettre sur deux</h2>
 
-<%-- Affichage d'une lettre sur deux horizontalement --%>
+<%-- Affichage d'une lettre sur deux horizontalement avec les espaces --%>
 <% for (int i = 0; i < longueurChaine; i += 2) { %>
-    <span><%= chaine.charAt(i) %></span>
+    <%-- Check if the character is a space --%>
+    <% if (chaine.charAt(i) == ' ') { %>
+        <span>&nbsp;</span> <%-- Use &nbsp; for a non-breaking space --%>
+    <% } else { %>
+        <span><%= chaine.charAt(i) %></span>
+    <% } %>
 <% } %>
 
 <h2>Exercice 5 : La phrase en verlant</h2>
