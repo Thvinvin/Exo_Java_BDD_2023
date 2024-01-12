@@ -69,8 +69,22 @@
     <span><%= chaine.charAt(i) %></span>
 <% } %>
 
-<h2>Exercice 5 : La phrase en verlant</h2>
-    <p>Ecrire le programme afin d'afficher le texte en verlant</p>
+    <h2>Exercice 5 : La phrase en verlant</h2>
+    <%
+        // Fonction pour inverser une chaîne
+        String reverseString(String str) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = str.length() - 1; i >= 0; i--) {
+                sb.append(str.charAt(i));
+            }
+            return sb.toString();
+        }
+
+        String[] mots = chaine.split(" ");
+        for (String mot : mots) {
+            out.print(reverseString(mot) + " ");
+        }
+    %>
 
 <h2>Exercice 6 : Consonnes et voyelles</h2>
     <p>Ecrire le programme afin de compter les consonnes et les voyelles dans votre texte</p>
