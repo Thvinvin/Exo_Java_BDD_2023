@@ -99,8 +99,7 @@ if (searchYearParam != null && !searchYearParam.isEmpty()) {
 %>
 
 <h2>Exercice 3 : Modification du titre du film</h2>
-
-<%
+<% 
 // Handling form submission for updating film title
 if (request.getMethod().equalsIgnoreCase("POST")) {
     String filmIdParam = request.getParameter("filmId");
@@ -157,10 +156,42 @@ if (request.getMethod().equalsIgnoreCase("POST")) {
     <input type="submit" value="Modifier Titre">
 </form>
 
-
-
-
 <h2>Exercice 4 : La valeur maximum</h2>
+
+<% 
+// Handling form submission for adding a new film
+if (request.getMethod().equalsIgnoreCase("POST")) {
+    String newFilmTitle = request.getParameter("newFilmTitle");
+    String newFilmYearParam = request.getParameter("newFilmYear");
+
+    if (newFilmTitle != null && !newFilmTitle.isEmpty() && newFilmYearParam != null && !newFilmYearParam.isEmpty()) {
+        try {
+            int newFilmYear = Integer.parseInt(newFilmYearParam);
+            String insertFilmSql = "INSERT INTO Film (titre, année) VALUES (?, ?)";
+            PreparedStatement insertFilmPstmt = conn.prepareStatement(insertFilmSql);
+            insertFilmPstmt.setString(1, newFilmTitle);
+            insertFilmPstmt.setInt(2, newFilmYear);
+
+            int rowsAffected = insertFilmPstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                out.println("<p>Le nouveau film a été ajouté avec succès.</p>");
+            } else {
+                out.println("<p>Erreur : Impossible d'ajouter le nouveau film.</p>");
+            }
+
+            insertFilmPstmt.close();
+        } catch (NumberFormatException e) {
+            out.println("<p>Erreur : Veuillez entrer une année valide.</p>");
+        } catch (SQLException e) {
+            out.println("<p>Erreur SQL : " + e.getMessage() + "</p>");
+        }
+    } else {
+        out.println("<p>Erreur : Veuillez remplir tous les champs du formulaire.</p>");
+    }
+}
+%>
+
 <p>Créer un formulaire pour saisir un nouveau film dans la base de données</p>
 <form action="" method="POST">
     <label for="newFilmTitle">Titre du nouveau film :</label>
@@ -178,3 +209,4 @@ if (request.getMethod().equalsIgnoreCase("POST")) {
 
 </body>
 </html>
+
