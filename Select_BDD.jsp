@@ -50,7 +50,7 @@
 <p>Extraire les films dont l'année est supérieur à l'année 2000 et inférieur à 2015.</p>
 
 
-<h2>Exercice 2 : Année de recherche</h2>
+ <h2>Exercice 2 : Année de recherche</h2>
     <form action="" method="GET">
         <label for="searchYear">Année de recherche :</label>
         <input type="text" id="searchYear" name="searchYear">
