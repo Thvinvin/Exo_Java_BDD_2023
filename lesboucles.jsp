@@ -57,27 +57,96 @@
 
 <h2>Exercice 3 : Triangle rectangle inversé</h2>
 <p>Ecrire le code afin de produire un triangle rectangle aligné sur la gauche</p>
+
+<%-- Boucle for pour afficher un triangle rectangle inversé --%>
+<% for (int j = cpt; j >= 1; j--) { %>
+    <p>
+    <% for (int i = 1; i <= j; i++) { %>
+        <%= "*" %>
+    <% } %>
+    </p>
+<% } %>
+
 <p>Exemple si l'utilisateur saisie le valeur 5</p>
 <p>*****</br>****</br>***</br>**</br>*</p>
 
 <h2>Exercice 4 : Triangle rectangle 2</h2>
 <p>Ecrire le code afin de produire un triangle rectangle aligné sur la droite</p>
+
+<%-- Boucle for pour afficher un triangle rectangle aligné sur la droite --%>
+<% for (int j = 1; j <= cpt; j++) { %>
+    <p>
+    <% for (int k = 1; k <= cpt - j; k++) { %>
+        <%= "&nbsp;" %>
+    <% } %>
+    <% for (int i = 1; i <= j; i++) { %>
+        <%= "*" %>
+    <% } %>
+    </p>
+<% } %>
+
 <p>Exemple si l'utilisateur saisie le valeur 5</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**</br>&nbsp;&nbsp;&nbsp;&nbsp;***</br>&nbsp;&nbsp;****</br>*****</p>
 
 <h2>Exercice 5 : Triangle isocele</h2>
 <p>Ecrire le code afin de produire un triangle rectangle aligné sur la droite</p>
+
+<%-- Boucle for pour afficher un triangle isocèle aligné sur la droite --%>
+<% for (int j = 1; j <= cpt; j++) { %>
+    <p>
+    <% for (int k = 1; k <= cpt - j; k++) { %>
+        <%= "&nbsp;" %>
+    <% } %>
+    <% for (int i = 1; i <= j; i++) { %>
+        <%= "*" %>
+    <% } %>
+    </p>
+<% } %>
+
 <p>Exemple si l'utilisateur saisie le valeur 5</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;*</br>&nbsp;&nbsp;&nbsp;**</br>&nbsp;&nbsp;***</br>&nbsp;****</br>*****</p>
 
 <h2>Exercice 6 : Le demi losange</h2>
 <p>Ecrire le code afin de produire un losange</p>
+
+<%-- Boucle for pour afficher un demi-losange --%>
+<% for (int j = 1; j <= cpt; j++) { %>
+    <p>
+    <% for (int k = 1; k <= cpt - j; k++) { %>
+        <%= "&nbsp;" %>
+    <% } %>
+    <% for (int i = 1; i <= j; i++) { %>
+        <%= "*" %>
+    <% } %>
+    </p>
+<% } %>
+
+<%-- Boucle for pour afficher l'autre moitié du losange --%>
+<% for (int j = 1; j <= cpt-1; j++) { %>
+    <p>
+    <% for (int k = 1; k <= j; k++) { %>
+        <%= "&nbsp;" %>
+    <% } %>
+    <% for (int i = 1; i <= cpt-j; i++) { %>
+        <%= "*" %>
+    <% } %>
+    </p>
+<% } %>
+
 <p>Exemple si l'utilisateur saisie le valeur 5</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**</br>&nbsp;&nbsp;&nbsp;&nbsp;***</br>&nbsp;&nbsp;****</br>*****</p>
 <p>*****</br>&nbsp;&nbsp;****</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</p>
 
 <h2>Exercice 7 : La table de multiplication</h2>
 <p>Ecrire le code afin de créser une table de multiplication</p>
+
+<%-- Boucle for pour afficher la table de multiplication --%>
+<% for (int i = 1; i <= 5; i++) { %>
+    <p>
+    <%= "5 x " + i + " = " + (5 * i) %>
+    </p>
+<% } %>
+
 <p>Exemple si l'utilisateur saisie le valeur 5</p>
 <p>5 x 1 = 5</p>
 <p>5 x 2 = 10</p>
