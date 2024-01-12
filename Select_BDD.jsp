@@ -153,10 +153,10 @@ if (request.getMethod().equalsIgnoreCase("POST")) {
     <label for="newTitle">Nouveau titre :</label>
     <input type="text" id="newTitle" name="newTitle" required>
     <br>
-    <input type="submit" value="Modifier Titre">
+    <input type="submit" value="Modifier le Titre">
 </form>
 
-<h2>Exercice 4 : La valeur maximum</h2>
+<h2>Exercice 4 : Ajouter un film</h2>
 
 <%
 // Handling form submission for adding a new film
@@ -210,7 +210,7 @@ if (request.getMethod().equalsIgnoreCase("POST")) {
         <label for="newFilmYear">Année du nouveau film :</label>
         <input type="text" id="newFilmYear" name="newFilmYear" required>
         <br>
-        <input type="submit" value="Ajouter Film">
+        <input type="submit" value="Ajouter le Film">
     </form>
 
     <%
