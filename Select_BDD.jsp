@@ -25,11 +25,6 @@
     PreparedStatement allFilmsPstmt = conn.prepareStatement(allFilmsSql);
     ResultSet allFilmsRs = allFilmsPstmt.executeQuery();
 
-    // Récupérer les genres depuis la base de données
-    String getGenresSql = "SELECT idGenre, nom FROM Genre";
-    PreparedStatement getGenresPstmt = conn.prepareStatement(getGenresSql);
-    ResultSet genresRs = getGenresPstmt.executeQuery();
-
     // Afficher les résultats
     while (allFilmsRs.next()) {
         String colonne1 = allFilmsRs.getString("idFilm");
@@ -161,58 +156,51 @@ if (request.getMethod().equalsIgnoreCase("POST")) {
     <input type="submit" value="Modifier Titre">
 </form>
 
- <h2>Exercice 4 : La valeur maximum</h2>
+<h2>Exercice 4 : La valeur maximum</h2>
 
-    <%
-    // Handling form submission for adding a new film
-    if (request.getMethod().equalsIgnoreCase("POST")) {
-        String newFilmTitle = request.getParameter("newFilmTitle");
-        String newFilmYearParam = request.getParameter("newFilmYear");
-        String selectedGenreId = request.getParameter("genreId");
+<%
+// Handling form submission for adding a new film
+if (request.getMethod().equalsIgnoreCase("POST")) {
+    String newFilmTitle = request.getParameter("newFilmTitle");
+    String newFilmYearParam = request.getParameter("newFilmYear");
 
-        out.println("New Film Title: " + newFilmTitle);  // Debugging message
-        out.println("New Film Year: " + newFilmYearParam);  // Debugging message
-        out.println("Selected Genre ID: " + selectedGenreId);  // Debugging message
+    out.println("New Film Title: " + newFilmTitle);  // Debugging message
+    out.println("New Film Year: " + newFilmYearParam);  // Debugging message
 
-        if (newFilmTitle != null && !newFilmTitle.isEmpty() && newFilmYearParam != null && !newFilmYearParam.isEmpty()) {
-            try {
-                int newFilmYear = Integer.parseInt(newFilmYearParam);
-                int genreId = Integer.parseInt(selectedGenreId);
+    if (newFilmTitle != null && !newFilmTitle.isEmpty() && newFilmYearParam != null && !newFilmYearParam.isEmpty()) {
+        try {
+            int newFilmYear = Integer.parseInt(newFilmYearParam);
+            
+            // Specify the columns for the insert statement
+            String insertFilmSql = "INSERT INTO Film (idFilm, titre, année, genre) VALUES (DEFAULT, ?, ?, ?)";
+            PreparedStatement insertFilmPstmt = conn.prepareStatement(insertFilmSql);
+            insertFilmPstmt.setString(1, newFilmTitle);
+            insertFilmPstmt.setInt(2, newFilmYear);
+            
+            // Replace 'defaultValue' with the actual value or retrieve it from the form
+            insertFilmPstmt.setString(3, "defaultValue");
 
-                // Specify the columns for the insert statement
-                String insertFilmSql = "INSERT INTO Film (idFilm, titre, année, genre) VALUES (DEFAULT, ?, ?, ?)";
-                PreparedStatement insertFilmPstmt = conn.prepareStatement(insertFilmSql, Statement.RETURN_GENERATED_KEYS);
-                insertFilmPstmt.setString(1, newFilmTitle);
-                insertFilmPstmt.setInt(2, newFilmYear);
-                insertFilmPstmt.setInt(3, genreId);
+            int rowsAffected = insertFilmPstmt.executeUpdate();
 
-                int rowsAffected = insertFilmPstmt.executeUpdate();
-
-                if (rowsAffected > 0) {
-                    // Récupérer l'ID du film inséré
-                    ResultSet generatedKeys = insertFilmPstmt.getGeneratedKeys();
-                    if (generatedKeys.next()) {
-                        int generatedId = generatedKeys.getInt(1);
-                        out.println("<p>Le nouveau film (ID: " + generatedId + ") a été ajouté avec succès.</p>");
-                    } else {
-                        out.println("<p>Erreur : Impossible de récupérer l'ID du nouveau film.</p>");
-                    }
-                } else {
-                    out.println("<p>Erreur : Impossible d'ajouter le nouveau film. Aucune ligne affectée.</p>");
-                }
-
-                insertFilmPstmt.close();
-            } catch (NumberFormatException e) {
-                out.println("<p>Erreur : Veuillez entrer une année valide.</p>");
-            } catch (SQLException e) {
-                out.println("<p>Erreur SQL : " + e.getMessage() + "</p>");
-                e.printStackTrace();  // Debugging line
+            if (rowsAffected > 0) {
+                out.println("<p>Le nouveau film a été ajouté avec succès.</p>");
+            } else {
+                out.println("<p>Erreur : Impossible d'ajouter le nouveau film. Aucune ligne affectée.</p>");
             }
-        } else {
-            out.println("<p>Erreur : Veuillez remplir tous les champs du formulaire.</p>");
+
+            insertFilmPstmt.close();
+        } catch (NumberFormatException e) {
+            out.println("<p>Erreur : Veuillez entrer une année valide.</p>");
+        } catch (SQLException e) {
+            out.println("<p>Erreur SQL : " + e.getMessage() + "</p>");
+            e.printStackTrace();  // Debugging line
         }
+    } else {
+        out.println("<p>Erreur : Veuillez remplir tous les champs du formulaire.</p>");
     }
-    %>
+}
+%>
+
 
     <p>Créer un formulaire pour saisir un nouveau film dans la base de données</p>
     <form action="" method="POST">
@@ -221,13 +209,6 @@ if (request.getMethod().equalsIgnoreCase("POST")) {
         <br>
         <label for="newFilmYear">Année du nouveau film :</label>
         <input type="text" id="newFilmYear" name="newFilmYear" required>
-        <br>
-        <label for="genreId">Choisir le genre :</label>
-        <select name="genreId" id="genreId">
-            <% while (genresRs.next()) { %>
-                <option value="<%= genresRs.getInt("idGenre") %>"><%= genresRs.getString("nom") %></option>
-            <% } %>
-        </select>
         <br>
         <input type="submit" value="Ajouter Film">
     </form>
