@@ -156,7 +156,7 @@ if (request.getMethod().equalsIgnoreCase("POST")) {
     <input type="submit" value="Modifier Titre">
 </form>
 
-<h2>Exercice 4 : La valeur maximum</h2>
+<h2>Exercice 4 : Ajouter un nouveau film</h2>
 
 <%
 // Handling form submission for adding a new film
@@ -171,14 +171,18 @@ if (request.getMethod().equalsIgnoreCase("POST")) {
         try {
             int newFilmYear = Integer.parseInt(newFilmYearParam);
             
+            // Replace 'yourValueForIdFilm' with the actual value or retrieve it from the form
+            int yourValueForIdFilm = 1;  // Replace this with the actual value
+            
             // Specify the columns for the insert statement
-            String insertFilmSql = "INSERT INTO Film (idFilm, titre, année, genre) VALUES (DEFAULT, ?, ?, ?)";
+            String insertFilmSql = "INSERT INTO Film (idFilm, titre, année, genre) VALUES (?, ?, ?, ?)";
             PreparedStatement insertFilmPstmt = conn.prepareStatement(insertFilmSql);
-            insertFilmPstmt.setString(1, newFilmTitle);
-            insertFilmPstmt.setInt(2, newFilmYear);
+            insertFilmPstmt.setInt(1, yourValueForIdFilm);
+            insertFilmPstmt.setString(2, newFilmTitle);
+            insertFilmPstmt.setInt(3, newFilmYear);
             
             // Replace 'defaultValue' with the actual value or retrieve it from the form
-            insertFilmPstmt.setString(3, "defaultValue");
+            insertFilmPstmt.setString(4, "defaultValue");
 
             int rowsAffected = insertFilmPstmt.executeUpdate();
 
@@ -200,6 +204,7 @@ if (request.getMethod().equalsIgnoreCase("POST")) {
     }
 }
 %>
+
 
 
     <p>Créer un formulaire pour saisir un nouveau film dans la base de données</p>
