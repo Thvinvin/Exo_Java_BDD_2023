@@ -121,6 +121,9 @@
     </p>
 <% } %>
 
+<%-- Espace entre les deux demi-losanges --%>
+<br>
+
 <%-- Boucle for pour afficher l'autre moitié du losange --%>
 <% for (int j = 1; j <= cpt-1; j++) { %>
     <p>
@@ -132,7 +135,6 @@
     <% } %>
     </p>
 <% } %>
-
 <p>Exemple si l'utilisateur saisie le valeur 5</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**</br>&nbsp;&nbsp;&nbsp;&nbsp;***</br>&nbsp;&nbsp;****</br>*****</p>
 <p>*****</br>&nbsp;&nbsp;****</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</p>
