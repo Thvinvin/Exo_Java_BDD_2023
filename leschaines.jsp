@@ -35,8 +35,31 @@
 <h2>Exercice 1 : Combien de 'e' dans notre chaine de charactère ?</h2>
 <p>Ecrire un programme pour compter le nombre de lettre e dans votre chaine de charactères</p>
 
+<h2>Exercice 1 : Combien de 'e' dans notre chaîne de caractères ?</h2>
+<p>Ecrire un programme pour compter le nombre de lettres 'e' dans votre chaîne de caractères</p>
+
+<%-- Comptage du nombre de lettres 'e' dans la chaîne --%>
+<% int compteurE = 0;
+   for (int i = 0; i < longueurChaine; i++) {
+       if (chaine.charAt(i) == 'e' || chaine.charAt(i) == 'E') {
+           compteurE++;
+       }
+   }
+%>
+
+<p>Le nombre de lettres 'e' dans votre chaîne est : <%= compteurE %></p>
+
 <h2>Exercice 2 : Affichage verticale</h2>
 <p>Ecrire le programme pour afficher le texte en vertical</br>
+
+<h2>Exercice 2 : Affichage vertical</h2>
+<p>Ecrire le programme pour afficher le texte en vertical</p>
+
+<%-- Affichage du texte en vertical --%>
+<% for (int i = 0; i < longueurChaine; i++) { %>
+    <p><%= chaine.charAt(i) %></p>
+<% } %>
+
 Exemple : Bonjour</br>
 B</br>
 o</br>
@@ -48,6 +71,16 @@ r</p>
 
 <h2>Exercice 3 : Retour à la ligne</h2>
 <p>La présence d'un espace provoque un retour à la ligne </br>
+
+<h2>Exercice 3 : Retour à la ligne</h2>
+<p>La présence d'un espace provoque un retour à la ligne</p>
+
+<%-- Affichage du texte avec retour à la ligne --%>
+<% String[] mots = chaine.split(" ");
+   for (String mot : mots) { %>
+    <p><%= mot %></p>
+<% } %>
+
 Exemple : L'hiver sera pluvieux</br>
 L'hiver</br>
 sera</br>
@@ -55,16 +88,61 @@ pluvieux</p>
 
 <h2>Exercice 4 : Afficher une lettre sur deux</h2>
 <p>Ecrire le programme pour afficher seulement une lettre sur deux de votre texte </br>
+
+<%-- Affichage d'une lettre sur deux --%>
+<% for (int i = 0; i < longueurChaine; i += 2) { %>
+    <p><%= chaine.charAt(i) %></p>
+<% } %>
+
 Exemple : L'hiver sera pluvieux</br>
 Lhvrsr lvex</p>
 
 <h2>Exercice 5 : La phrase en verlant</h2>
 <p>Ecrire le programme afin d'afficher le texte en verlant </br>
+
+<%-- Affichage du texte en verlan --%>
+<%
+   String[] mots = chaine.split(" ");
+   for (String mot : mots) {
+       for (int i = mot.length() - 1; i >= 0; i--) {
+           out.print(mot.charAt(i));
+       }
+       out.print(" ");
+   }
+%>
+
 Exemple : L'hiver sera pluvieux</br>
 xueivulp ares revih'l</p>
 
 <h2>Exercice 6 : Consonnes et voyelles</h2>
 <p>Ecrire le programme afin de compter les consonnes et les voyelles dans votre texte</p>
+
+<h2>Exercice 6 : Consonnes et voyelles</h2>
+<p>Ecrire le programme afin de compter les consonnes et les voyelles dans votre texte</p>
+
+<%
+   // Initialisation des compteurs
+   int nombreVoyelles = 0;
+   int nombreConsonnes = 0;
+
+   // Conversion de la chaîne en minuscules pour simplifier la vérification
+   String chaineMinuscules = chaine.toLowerCase();
+
+   // Boucle pour compter les voyelles et les consonnes
+   for (int i = 0; i < longueurChaine; i++) {
+       char caractere = chaineMinuscules.charAt(i);
+       if (Character.isLetter(caractere)) {
+           if (caractere == 'a' || caractere == 'e' || caractere == 'i' || caractere == 'o' || caractere == 'u' || caractere == 'y') {
+               nombreVoyelles++;
+           } else {
+               nombreConsonnes++;
+           }
+       }
+   }
+%>
+
+<p>Nombre de voyelles dans votre texte : <%= nombreVoyelles %></p>
+<p>Nombre de consonnes dans votre texte : <%= nombreConsonnes %></p>
 
 <% } %>
 <p><a href="index.html">Retour au sommaire</a></p>
