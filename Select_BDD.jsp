@@ -41,15 +41,24 @@
 
 <h2>Exercice 1 : Les films entre 2000 et 2015</h2>
 <p>Extraire les films dont l'année est supérieur à l'année 2000 et inférieur à 2015.</p>
-        // Afficher les résultats sous l'exercice 1
-        while (rs.next()) {
-            String colonne1 = rs.getString("idFilm");
-            String colonne2 = rs.getString("titre");
-            String colonne3 = rs.getString("année");
-            // Faites ce que vous voulez avec les données...
-            //Exemple d'affichage de 2 colonnes
-            out.println("id : " + colonne1 + ", titre : " + colonne2 + ", année : " + colonne3 + "</br>");
-        }
+<!-- Afficher les résultats sous forme de tableau -->
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Titre</th>
+            <th>Année</th>
+        </tr>
+
+        <% while (rs.next()) { %>
+            <tr>
+                <td><%= rs.getString("idFilm") %></td>
+                <td><%= rs.getString("titre") %></td>
+                <td><%= rs.getString("année") %></td>
+            </tr>
+        <% } %>
+    </table>
+
+    <% 
 
 <h2>Exercice 2 : Année de recherche</h2>
     <form action="" method="GET">
