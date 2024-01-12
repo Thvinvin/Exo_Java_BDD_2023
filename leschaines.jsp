@@ -69,8 +69,12 @@
     <span><%= chaine.charAt(i) %></span>
 <% } %>
 
-      <h2>Exercice 5 : La phrase en verlant</h2>
-    <p>Ecrire le programme afin d'afficher le texte en verlant</p>
+    <h2>Exercice 5 : La phrase en verlant</h2>
+
+<%-- Affichage du texte en verlant --%>
+<% for (int i = longueurChaine - 1; i >= 0; i--) { %>
+    <span><%= chaine.charAt(i) %></span>
+<% } %>
 
 
 <h2>Exercice 6 : Consonnes et voyelles</h2>
