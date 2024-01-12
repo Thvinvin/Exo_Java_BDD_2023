@@ -158,43 +158,45 @@ if (request.getMethod().equalsIgnoreCase("POST")) {
 
 <h2>Exercice 4 : La valeur maximum</h2>
 
-    <%
-    // Handling form submission for adding a new film
-    if (request.getMethod().equalsIgnoreCase("POST")) {
-        String newFilmTitle = request.getParameter("newFilmTitle");
-        String newFilmYearParam = request.getParameter("newFilmYear");
+<%
+// Handling form submission for adding a new film
+if (request.getMethod().equalsIgnoreCase("POST")) {
+    String newFilmTitle = request.getParameter("newFilmTitle");
+    String newFilmYearParam = request.getParameter("newFilmYear");
 
-        out.println("New Film Title: " + newFilmTitle);  // Debugging message
-        out.println("New Film Year: " + newFilmYearParam);  // Debugging message
+    out.println("New Film Title: " + newFilmTitle);  // Debugging message
+    out.println("New Film Year: " + newFilmYearParam);  // Debugging message
 
-        if (newFilmTitle != null && !newFilmTitle.isEmpty() && newFilmYearParam != null && !newFilmYearParam.isEmpty()) {
-            try {
-                int newFilmYear = Integer.parseInt(newFilmYearParam);
-                String insertFilmSql = "INSERT INTO Film (titre, année) VALUES (?, ?)";
-                PreparedStatement insertFilmPstmt = conn.prepareStatement(insertFilmSql);
-                insertFilmPstmt.setString(1, newFilmTitle);
-                insertFilmPstmt.setInt(2, newFilmYear);
+    if (newFilmTitle != null && !newFilmTitle.isEmpty() && newFilmYearParam != null && !newFilmYearParam.isEmpty()) {
+        try {
+            int newFilmYear = Integer.parseInt(newFilmYearParam);
+            
+            // Specify the columns for the insert statement
+            String insertFilmSql = "INSERT INTO Film (idFilm, titre, année) VALUES (DEFAULT, ?, ?)";
+            PreparedStatement insertFilmPstmt = conn.prepareStatement(insertFilmSql);
+            insertFilmPstmt.setString(1, newFilmTitle);
+            insertFilmPstmt.setInt(2, newFilmYear);
 
-                int rowsAffected = insertFilmPstmt.executeUpdate();
+            int rowsAffected = insertFilmPstmt.executeUpdate();
 
-                if (rowsAffected > 0) {
-                    out.println("<p>Le nouveau film a été ajouté avec succès.</p>");
-                } else {
-                    out.println("<p>Erreur : Impossible d'ajouter le nouveau film. Aucune ligne affectée.</p>");
-                }
-
-                insertFilmPstmt.close();
-            } catch (NumberFormatException e) {
-                out.println("<p>Erreur : Veuillez entrer une année valide.</p>");
-            } catch (SQLException e) {
-                out.println("<p>Erreur SQL : " + e.getMessage() + "</p>");
-                e.printStackTrace();  // Debugging line
+            if (rowsAffected > 0) {
+                out.println("<p>Le nouveau film a été ajouté avec succès.</p>");
+            } else {
+                out.println("<p>Erreur : Impossible d'ajouter le nouveau film. Aucune ligne affectée.</p>");
             }
-        } else {
-            out.println("<p>Erreur : Veuillez remplir tous les champs du formulaire.</p>");
+
+            insertFilmPstmt.close();
+        } catch (NumberFormatException e) {
+            out.println("<p>Erreur : Veuillez entrer une année valide.</p>");
+        } catch (SQLException e) {
+            out.println("<p>Erreur SQL : " + e.getMessage() + "</p>");
+            e.printStackTrace();  // Debugging line
         }
+    } else {
+        out.println("<p>Erreur : Veuillez remplir tous les champs du formulaire.</p>");
     }
-    %>
+}
+%>
 
     <p>Créer un formulaire pour saisir un nouveau film dans la base de données</p>
     <form action="" method="POST">
