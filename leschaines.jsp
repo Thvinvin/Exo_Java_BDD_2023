@@ -67,9 +67,6 @@ u</br>
 r</p>
 
 <h2>Exercice 3 : Retour à la ligne</h2>
-<p>La présence d'un espace provoque un retour à la ligne </br>
-
-<h2>Exercice 3 : Retour à la ligne</h2>
 <p>La présence d'un espace provoque un retour à la ligne</p>
 
 <%-- Affichage du texte avec retour à la ligne --%>
@@ -84,7 +81,13 @@ sera</br>
 pluvieux</p>
 
 <h2>Exercice 4 : Afficher une lettre sur deux</h2>
-<p>Ecrire le programme pour afficher seulement une lettre sur deux de votre texte </br>
+<p>Ecrire le programme pour afficher seulement une lettre sur deux de votre texte</p>
+
+<%-- Affichage d'une lettre sur deux --%>
+<% for (int i = 0; i < longueurChaine; i += 2) { %>
+    <p><%= chaine.charAt(i) %></p>
+<% } %>
+
 Exemple : L'hiver sera pluvieux</br>
 Lhvrsr lvex</p>
 
