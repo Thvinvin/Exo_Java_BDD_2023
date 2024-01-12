@@ -67,35 +67,37 @@
         <input type="submit" value="Rechercher">
     </form>
 
-    <% 
-    // Exercice 2 : Afficher les films d'une année donnée
-    String searchYearParam = request.getParameter("searchYear");
+<% 
+// Exercice 2 : Afficher les films d'une année donnée
+String searchYearParam = request.getParameter("searchYear");
 
-    if (searchYearParam != null && !searchYearParam.isEmpty()) {
-        try {
-            int searchYear = Integer.parseInt(searchYearParam);
-            String searchSql = "SELECT idFilm, titre, année FROM Film WHERE année = ?";
-            PreparedStatement searchPstmt = conn.prepareStatement(searchSql);
-            searchPstmt.setInt(1, searchYear);
-            ResultSet searchRs = searchPstmt.executeQuery();
+if (searchYearParam != null && !searchYearParam.isEmpty()) {
+    try {
+        int searchYear = Integer.parseInt(searchYearParam);
+        String searchSql = "SELECT idFilm, titre, année FROM Film WHERE année = ?";
+        PreparedStatement searchPstmt = conn.prepareStatement(searchSql);
+        searchPstmt.setInt(1, searchYear);
+        ResultSet searchRs = searchPstmt.executeQuery();
 
-            out.println("<h2>Films de l'année " + searchYear + "</h2>");
+        out.println("<h2>Films de l'année " + searchYear + "</h2>");
 
-            while (searchRs.next()) {
-                String colonne1 = searchRs.getString("idFilm");
-                String colonne2 = searchRs.getString("titre");
-                String colonne3 = searchRs.getString("année");
+        while (searchRs.next()) {
+            String colonne1 = searchRs.getString("idFilm");
+            String colonne2 = searchRs.getString("titre");
+            String colonne3 = searchRs.getString("année");
 
-                out.println("id : " + colonne1 + ", titre : " + colonne2 + ", année : " + colonne3 + "</br>");
-            }
-
-            searchRs.close();
-            searchPstmt.close();
-        } catch (NumberFormatException e) {
-            out.println("<p>Erreur : Veuillez entrer une année valide.</p>");
+            out.println("id : " + colonne1 + ", titre : " + colonne2 + ", année : " + colonne3 + "</br>");
         }
+
+        searchRs.close();
+        searchPstmt.close();
+    } catch (NumberFormatException e) {
+        out.println("<p>Erreur : Veuillez entrer une année valide.</p>");
+    } catch (SQLException e) {
+        out.println("<p>Erreur SQL : " + e.getMessage() + "</p>");
     }
-    %>
+}
+%>
 
 <h2>Exercice 3 : Modification du titre du film</h2>
 <p>Créer un fichier permettant de modifier le titre d'un film sur la base de son ID (ID choisi par l'utilisateur)</p>
