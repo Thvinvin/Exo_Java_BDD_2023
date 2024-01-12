@@ -63,6 +63,15 @@
 
 <h2>Exercice 4 : La valeur maximum</h2>
 <p>Créer un formulaire pour saisir un nouveau film dans la base de données</p>
+   <form action="" method="POST">
+        <label for="newFilmTitle">Titre du nouveau film :</label>
+        <input type="text" id="newFilmTitle" name="newFilmTitle" required>
+        <br>
+        <label for="newFilmYear">Année du nouveau film :</label>
+        <input type="text" id="newFilmYear" name="newFilmYear" required>
+        <br>
+        <input type="submit" value="Ajouter Film">
+    </form>
 
 </body>
 </html>
