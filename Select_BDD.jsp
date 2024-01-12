@@ -169,7 +169,7 @@ if (request.getMethod().equalsIgnoreCase("POST")) {
             int newFilmYear = Integer.parseInt(newFilmYearParam);
             
             // Specify the columns for the insert statement
-            String insertFilmSql = "INSERT INTO Film (idFilm, titre, année, genre) VALUES (DEFAULT, ?, ?, ?)";
+            String insertFilmSql = "INSERT INTO Film (idFilm, titre, année, genre) VALUES (DEFAULT, ?, ?, 'defaultValue')";
             PreparedStatement insertFilmPstmt = conn.prepareStatement(insertFilmSql);
             insertFilmPstmt.setString(1, newFilmTitle);
             insertFilmPstmt.setInt(2, newFilmYear);
