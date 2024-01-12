@@ -99,7 +99,42 @@ if (searchYearParam != null && !searchYearParam.isEmpty()) {
 %>
 
 <h2>Exercice 3 : Modification du titre du film</h2>
-<p>Choisir un film à modifier :</p>
+
+<%
+// Handling form submission for updating film title
+if (request.getMethod().equalsIgnoreCase("POST")) {
+    String filmIdParam = request.getParameter("filmId");
+    String newTitle = request.getParameter("newTitle");
+
+    if (filmIdParam != null && !filmIdParam.isEmpty() && newTitle != null && !newTitle.isEmpty()) {
+        try {
+            int filmId = Integer.parseInt(filmIdParam);
+            String updateTitleSql = "UPDATE Film SET titre = ? WHERE idFilm = ?";
+            PreparedStatement updateTitlePstmt = conn.prepareStatement(updateTitleSql);
+            updateTitlePstmt.setString(1, newTitle);
+            updateTitlePstmt.setInt(2, filmId);
+
+            int rowsAffected = updateTitlePstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                out.println("<p>Le titre du film a été modifié avec succès.</p>");
+            } else {
+                out.println("<p>Erreur : Aucun film trouvé avec l'ID fourni.</p>");
+            }
+
+            updateTitlePstmt.close();
+        } catch (NumberFormatException e) {
+            out.println("<p>Erreur : Veuillez sélectionner un film valide.</p>");
+        } catch (SQLException e) {
+            out.println("<p>Erreur SQL : " + e.getMessage() + "</p>");
+        }
+    } else {
+        out.println("<p>Erreur : Veuillez remplir tous les champs du formulaire.</p>");
+    }
+}
+%>
+
+<p>Choisissez un film à modifier :</p>
 <form action="" method="POST">
     <label for="filmId">Sélectionnez un film :</label>
     <select name="filmId" id="filmId">
@@ -121,6 +156,7 @@ if (searchYearParam != null && !searchYearParam.isEmpty()) {
     <br>
     <input type="submit" value="Modifier Titre">
 </form>
+
 
 
 
