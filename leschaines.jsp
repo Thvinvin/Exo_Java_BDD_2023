@@ -51,10 +51,11 @@
 <h2>Exercice 2 : Affichage vertical</h2>
 <p>Ecrire le programme pour afficher le texte en vertical</p>
 
-<%-- Affichage du texte en vertical --%>
+<%-- Affichage du texte en vertical avec espacement réduit --%>
 <% for (int i = 0; i < longueurChaine; i++) { %>
-    <p><%= chaine.charAt(i) %></p>
+    <p style="letter-spacing: -1px;"><%= chaine.charAt(i) %></p>
 <% } %>
+
 
 Exemple : Bonjour</br>
 B</br>
