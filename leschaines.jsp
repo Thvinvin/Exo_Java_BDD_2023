@@ -33,7 +33,6 @@
 
 
 <h2>Exercice 1 : Combien de 'e' dans notre chaîne de caractères ?</h2>
-<p>Ecrire un programme pour compter le nombre de lettres 'e' dans votre chaîne de caractères</p>
 
 <%-- Comptage du nombre de lettres 'e' dans la chaîne --%>
 <% int compteurE = 0;
@@ -49,25 +48,13 @@
 
 
 <h2>Exercice 2 : Affichage vertical</h2>
-<p>Ecrire le programme pour afficher le texte en vertical</p>
 
 <%-- Affichage du texte en vertical --%>
 <% for (int i = 0; i < longueurChaine; i++) { %>
     <p><%= chaine.charAt(i) %></p>
 <% } %>
 
-
-Exemple : Bonjour</br>
-B</br>
-o</br>
-n</br>
-j</br>
-o</br>
-u</br>
-r</p>
-
 <h2>Exercice 3 : Retour à la ligne</h2>
-<p>La présence d'un espace provoque un retour à la ligne</p>
 
 <%-- Affichage du texte avec retour à la ligne --%>
 <% String[] mots = chaine.split(" ");
@@ -75,31 +62,15 @@ r</p>
     <p><%= mot %></p>
 <% } %>
 
-Exemple : L'hiver sera pluvieux</br>
-L'hiver</br>
-sera</br>
-pluvieux</p>
-
 <h2>Exercice 4 : Afficher une lettre sur deux</h2>
-<p>Ecrire le programme pour afficher seulement une lettre sur deux de votre texte</p>
 
 <%-- Affichage d'une lettre sur deux horizontalement --%>
 <% for (int i = 0; i < longueurChaine; i += 2) { %>
     <span><%= chaine.charAt(i) %></span>
 <% } %>
 
-
-</br> Exemple : L'hiver sera pluvieux</br>
-Lhvrsr lvex</p>
-
 <h2>Exercice 5 : La phrase en verlant</h2>
     <p>Ecrire le programme afin d'afficher le texte en verlant</p>
-
-Exemple : L'hiver sera pluvieux</br>
-xueivulp ares revih'l</p>
-
-<h2>Exercice 6 : Consonnes et voyelles</h2>
-<p>Ecrire le programme afin de compter les consonnes et les voyelles dans votre texte</p>
 
 <h2>Exercice 6 : Consonnes et voyelles</h2>
     <p>Ecrire le programme afin de compter les consonnes et les voyelles dans votre texte</p>
