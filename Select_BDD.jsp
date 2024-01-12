@@ -50,6 +50,31 @@
         <input type="text" id="searchYear" name="searchYear">
         <input type="submit" value="Rechercher">
     </form>
+<%
+      String searchYearParam = request.getParameter("searchYear");
+    if (searchYearParam != null && !searchYearParam.isEmpty()) {
+        try {
+            int searchYear = Integer.parseInt(searchYearParam);
+            String searchSql = "SELECT idFilm, titre, année FROM Film WHERE année = ?";
+            PreparedStatement searchPstmt = conn.prepareStatement(searchSql);
+            searchPstmt.setInt(1, searchYear);
+            ResultSet searchRs = searchPstmt.executeQuery();
+
+            %>
+            <h2>Films de l'année <%= searchYear %></h2>
+            <div>
+            <%
+            while (searchRs.next()) {
+                String colonne1 = searchRs.getString("idFilm");
+                String colonne2 = searchRs.getString("titre");
+                String colonne3 = searchRs.getString("année");
+
+                out.println("id : " + colonne1 + ", titre : " + colonne2 + ", année : " + colonne3 + "</br>");
+            }
+
+            searchRs.close();
+            searchPstmt.close();
+            %>
 
 
 <h2>Exercice 3 : Modification du titre du film</h2>
