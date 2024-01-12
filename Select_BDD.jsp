@@ -164,9 +164,6 @@ if (request.getMethod().equalsIgnoreCase("POST")) {
     String newFilmTitle = request.getParameter("newFilmTitle");
     String newFilmYearParam = request.getParameter("newFilmYear");
 
-    out.println("New Film Title: " + newFilmTitle);  // Debugging message
-    out.println("New Film Year: " + newFilmYearParam);  // Debugging message
-
     if (newFilmTitle != null && !newFilmTitle.isEmpty() && newFilmYearParam != null && !newFilmYearParam.isEmpty()) {
         try {
             int newFilmYear = Integer.parseInt(newFilmYearParam);
