@@ -85,7 +85,7 @@ pluvieux</p>
 
 <%-- Affichage d'une lettre sur deux horizontalement --%>
 <% for (int i = 0; i < longueurChaine; i += 2) { %>
-    <%= chaine.charAt(i) %>
+    <span><%= chaine.charAt(i) %></span>
 <% } %>
 
 
