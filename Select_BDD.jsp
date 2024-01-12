@@ -20,13 +20,12 @@
     // Établir la connexion
     Connection conn = DriverManager.getConnection(url, user, password);
 
-    // Exercice : Afficher tous les films de la base de données
+    // Afficher tous les films de la base de données
     String allFilmsSql = "SELECT idFilm, titre, année FROM Film WHERE année >= 2000";
     PreparedStatement allFilmsPstmt = conn.prepareStatement(allFilmsSql);
     ResultSet allFilmsRs = allFilmsPstmt.executeQuery();
 
     // Afficher les résultats
-    out.println("<h2>Tous les films de la base de données</h2>");
     while (allFilmsRs.next()) {
         String colonne1 = allFilmsRs.getString("idFilm");
         String colonne2 = allFilmsRs.getString("titre");
@@ -49,7 +48,6 @@
     ResultSet films2000to2015Rs = films2000to2015Pstmt.executeQuery();
 
     // Afficher les résultats
-    out.println("<h2>Films entre 2000 et 2015</h2>");
     while (films2000to2015Rs.next()) {
         String colonne1 = films2000to2015Rs.getString("idFilm");
         String colonne2 = films2000to2015Rs.getString("titre");
