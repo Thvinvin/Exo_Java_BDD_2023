@@ -17,35 +17,18 @@
 <%-- Vérification de l'existence de la valeur --%>
 <% if (valeur != null && !valeur.isEmpty()) { %>
 
-    <%-- Boucle for pour afficher le carré d'étoiles --%>
-    <% int taille = Integer.parseInt(valeur); %>
-    <%
-        for (int i = 1; i <= taille; i++) {
-    %>
-        <p>
-            <% for (int j = 1; j <= taille; j++) { %>
-                <%= "*" %>
-            <% } %>
-        </p>
-    <%
-        }
-    %>
-
+<%-- Boucle for pour afficher une ligne d'étoiles --%>
+    <%int cpt = Integer.parseInt(valeur); %>
+    <p>
+    <% for (int i = 1; i <= cpt; i++) { %>
+       <%= "*" %>
     <% } %>
+    </p>
 
 <h2>Exercice 1 : Le carré d'étoiles</h2>
 <p>Ecrire le code afin de produire un carré d'étoile</p>
 <p>Exemple si l'utilisateur saisie le valeur 5</p>
-    <%
-        for (int i = 0; i < taille; i++) {
-            for (int j = 0; j < taille; j++) {
-                out.print("*");
-            }
-            out.println("<br>");
-        }
-    %>
-
-    <% } %>
+<p>*****</br>*****</br>*****</br>*****</br>*****</p>
 
 <h2>Exercice 2 : Triangle rectangle gauche</h2>
 <p>Ecrire le code afin de produire un triangle rectangle aligné sur la gauche</p>
