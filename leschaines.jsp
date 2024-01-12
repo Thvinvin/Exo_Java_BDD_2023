@@ -101,6 +101,33 @@ xueivulp ares revih'l</p>
 <h2>Exercice 6 : Consonnes et voyelles</h2>
 <p>Ecrire le programme afin de compter les consonnes et les voyelles dans votre texte</p>
 
+<h2>Exercice 6 : Consonnes et voyelles</h2>
+    <p>Ecrire le programme afin de compter les consonnes et les voyelles dans votre texte</p>
+
+    <%
+       // Initialisation des compteurs
+       int nombreVoyelles = 0;
+       int nombreConsonnes = 0;
+
+       // Conversion de la chaîne en minuscules pour simplifier la vérification
+       String chaineMinuscules = chaine.toLowerCase();
+
+       // Boucle pour compter les voyelles et les consonnes
+       for (int i = 0; i < longueurChaine; i++) {
+           char caractere = chaineMinuscules.charAt(i);
+           if (Character.isLetter(caractere)) {
+               if (caractere == 'a' || caractere == 'e' || caractere == 'i' || caractere == 'o' || caractere == 'u' || caractere == 'y') {
+                   nombreVoyelles++;
+               } else {
+                   nombreConsonnes++;
+               }
+           }
+       }
+    %>
+
+    <p>Nombre de voyelles dans votre texte : <%= nombreVoyelles %></p>
+    <p>Nombre de consonnes dans votre texte : <%= nombreConsonnes %></p>
+
 <% } %>
 <p><a href="index.html">Retour au sommaire</a></p>
 </body>
