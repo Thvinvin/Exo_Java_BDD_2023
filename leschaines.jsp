@@ -69,11 +69,16 @@
     <span><%= chaine.charAt(i) %></span>
 <% } %>
 
-    <h2>Exercice 5 : La phrase en verlant</h2>
+<h2>Exercice 5 : La phrase en verlant</h2>
 
-<%-- Affichage du texte en verlant --%>
+<%-- Affichage du texte en verlant avec les espaces --%>
 <% for (int i = longueurChaine - 1; i >= 0; i--) { %>
-    <span><%= chaine.charAt(i) %></span>
+    <%-- Check if the character is a space --%>
+    <% if (chaine.charAt(i) == ' ') { %>
+        <span>&nbsp;</span> <%-- Use &nbsp; for a non-breaking space --%>
+    <% } else { %>
+        <span><%= chaine.charAt(i) %></span>
+    <% } %>
 <% } %>
 
 
