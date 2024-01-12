@@ -158,55 +158,58 @@ if (request.getMethod().equalsIgnoreCase("POST")) {
 
 <h2>Exercice 4 : La valeur maximum</h2>
 
-<% 
-// Handling form submission for adding a new film
-if (request.getMethod().equalsIgnoreCase("POST")) {
-    String newFilmTitle = request.getParameter("newFilmTitle");
-    String newFilmYearParam = request.getParameter("newFilmYear");
+    <%
+    // Handling form submission for adding a new film
+    if (request.getMethod().equalsIgnoreCase("POST")) {
+        String newFilmTitle = request.getParameter("newFilmTitle");
+        String newFilmYearParam = request.getParameter("newFilmYear");
 
-    if (newFilmTitle != null && !newFilmTitle.isEmpty() && newFilmYearParam != null && !newFilmYearParam.isEmpty()) {
-        try {
-            int newFilmYear = Integer.parseInt(newFilmYearParam);
-            String insertFilmSql = "INSERT INTO Film (titre, année) VALUES (?, ?)";
-            PreparedStatement insertFilmPstmt = conn.prepareStatement(insertFilmSql);
-            insertFilmPstmt.setString(1, newFilmTitle);
-            insertFilmPstmt.setInt(2, newFilmYear);
+        out.println("New Film Title: " + newFilmTitle);  // Debugging message
+        out.println("New Film Year: " + newFilmYearParam);  // Debugging message
 
-            int rowsAffected = insertFilmPstmt.executeUpdate();
+        if (newFilmTitle != null && !newFilmTitle.isEmpty() && newFilmYearParam != null && !newFilmYearParam.isEmpty()) {
+            try {
+                int newFilmYear = Integer.parseInt(newFilmYearParam);
+                String insertFilmSql = "INSERT INTO Film (titre, année) VALUES (?, ?)";
+                PreparedStatement insertFilmPstmt = conn.prepareStatement(insertFilmSql);
+                insertFilmPstmt.setString(1, newFilmTitle);
+                insertFilmPstmt.setInt(2, newFilmYear);
 
-            if (rowsAffected > 0) {
-                out.println("<p>Le nouveau film a été ajouté avec succès.</p>");
-            } else {
-                out.println("<p>Erreur : Impossible d'ajouter le nouveau film.</p>");
+                int rowsAffected = insertFilmPstmt.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    out.println("<p>Le nouveau film a été ajouté avec succès.</p>");
+                } else {
+                    out.println("<p>Erreur : Impossible d'ajouter le nouveau film. Aucune ligne affectée.</p>");
+                }
+
+                insertFilmPstmt.close();
+            } catch (NumberFormatException e) {
+                out.println("<p>Erreur : Veuillez entrer une année valide.</p>");
+            } catch (SQLException e) {
+                out.println("<p>Erreur SQL : " + e.getMessage() + "</p>");
+                e.printStackTrace();  // Debugging line
             }
-
-            insertFilmPstmt.close();
-        } catch (NumberFormatException e) {
-            out.println("<p>Erreur : Veuillez entrer une année valide.</p>");
-        } catch (SQLException e) {
-            out.println("<p>Erreur SQL : " + e.getMessage() + "</p>");
+        } else {
+            out.println("<p>Erreur : Veuillez remplir tous les champs du formulaire.</p>");
         }
-    } else {
-        out.println("<p>Erreur : Veuillez remplir tous les champs du formulaire.</p>");
     }
-}
-%>
+    %>
 
-<p>Créer un formulaire pour saisir un nouveau film dans la base de données</p>
-<form action="" method="POST">
-    <label for="newFilmTitle">Titre du nouveau film :</label>
-    <input type="text" id="newFilmTitle" name="newFilmTitle" required>
-    <br>
-    <label for="newFilmYear">Année du nouveau film :</label>
-    <input type="text" id="newFilmYear" name="newFilmYear" required>
-    <br>
-    <input type="submit" value="Ajouter Film">
-</form>
+    <p>Créer un formulaire pour saisir un nouveau film dans la base de données</p>
+    <form action="" method="POST">
+        <label for="newFilmTitle">Titre du nouveau film :</label>
+        <input type="text" id="newFilmTitle" name="newFilmTitle" required>
+        <br>
+        <label for="newFilmYear">Année du nouveau film :</label>
+        <input type="text" id="newFilmYear" name="newFilmYear" required>
+        <br>
+        <input type="submit" value="Ajouter Film">
+    </form>
 
-<%
+    <%
     conn.close();
-%>
+    %>
 
 </body>
 </html>
-
