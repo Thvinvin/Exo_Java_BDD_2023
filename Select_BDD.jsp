@@ -51,6 +51,15 @@
 
 <h2>Exercice 3 : Modification du titre du film</h2>
 <p>Créer un fichier permettant de modifier le titre d'un film sur la base de son ID (ID choisi par l'utilisateur)</p>
+ <form action="" method="POST">
+        <label for="filmId">ID du film à modifier :</label>
+        <input type="text" id="filmId" name="filmId" required>
+        <br>
+        <label for="newTitle">Nouveau titre :</label>
+        <input type="text" id="newTitle" name="newTitle" required>
+        <br>
+        <input type="submit" value="Modifier Titre">
+    </form>
 
 <h2>Exercice 4 : La valeur maximum</h2>
 <p>Créer un formulaire pour saisir un nouveau film dans la base de données</p>
