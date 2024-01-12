@@ -92,10 +92,9 @@ pluvieux</p>
 </br> Exemple : L'hiver sera pluvieux</br>
 Lhvrsr lvex</p>
 
-    <h2>Exercice 5 : La phrase en verlant</h2>
+<h2>Exercice 5 : La phrase en verlant</h2>
     <p>Ecrire le programme afin d'afficher le texte en verlant</p>
 
-    <%-- Affichage du texte en verlan --%>
     <%
        String[] mots = chaine.split(" ");
        for (String mot : mots) {
