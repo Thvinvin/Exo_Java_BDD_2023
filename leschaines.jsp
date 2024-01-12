@@ -95,16 +95,6 @@ Lhvrsr lvex</p>
 <h2>Exercice 5 : La phrase en verlant</h2>
     <p>Ecrire le programme afin d'afficher le texte en verlant</p>
 
-    <%
-       String[] mots = chaine.split(" ");
-       for (String mot : mots) {
-           for (int i = mot.length() - 1; i >= 0; i--) {
-               out.print(mot.charAt(i));
-           }
-           out.print(" ");
-       }
-    %>
-
 Exemple : L'hiver sera pluvieux</br>
 xueivulp ares revih'l</p>
 
