@@ -44,6 +44,7 @@
 
 
  <h2>Exercice 2 : Année de recherche</h2>
+<% 
 // Établir la connexion
         Connection conn = DriverManager.getConnection(url, user, password);
     String searchYearParam = request.getParameter("searchYear");
