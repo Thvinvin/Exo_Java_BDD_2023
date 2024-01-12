@@ -100,15 +100,35 @@ if (searchYearParam != null && !searchYearParam.isEmpty()) {
 
 <h2>Exercice 3 : Modification du titre du film</h2>
 <p>Créer un fichier permettant de modifier le titre d'un film sur la base de son ID (ID choisi par l'utilisateur)</p>
-<form action="" method="POST">
-    <label for="filmId">ID du film à modifier :</label>
-    <input type="text" id="filmId" name="filmId" required>
-    <br>
-    <label for="newTitle">Nouveau titre :</label>
-    <input type="text" id="newTitle" name="newTitle" required>
-    <br>
-    <input type="submit" value="Modifier Titre">
-</form>
+
+<%
+// Exercice 3 : Modification du titre du film
+String filmIdParam = request.getParameter("filmId");
+String newTitleParam = request.getParameter("newTitle");
+
+if (filmIdParam != null && newTitleParam != null && !filmIdParam.isEmpty() && !newTitleParam.isEmpty()) {
+    try {
+        int filmId = Integer.parseInt(filmIdParam);
+        String updateSql = "UPDATE Film SET titre = ? WHERE idFilm = ?";
+        PreparedStatement updatePstmt = conn.prepareStatement(updateSql);
+        updatePstmt.setString(1, newTitleParam);
+        updatePstmt.setInt(2, filmId);
+        int rowsUpdated = updatePstmt.executeUpdate();
+
+        if (rowsUpdated > 0) {
+            out.println("<p>Titre du film avec l'ID " + filmId + " modifié avec succès.</p>");
+        } else {
+            out.println("<p>Aucun film trouvé avec l'ID " + filmId + ".</p>");
+        }
+
+        updatePstmt.close();
+    } catch (NumberFormatException e) {
+        out.println("<p>Erreur : Veuillez entrer un ID de film valide.</p>");
+    } catch (SQLException e) {
+        out.println("<p>Erreur SQL : " + e.getMessage() + "</p>");
+    }
+}
+%>
 
 <h2>Exercice 4 : La valeur maximum</h2>
 <p>Créer un formulaire pour saisir un nouveau film dans la base de données</p>
