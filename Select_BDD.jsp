@@ -25,6 +25,11 @@
     PreparedStatement allFilmsPstmt = conn.prepareStatement(allFilmsSql);
     ResultSet allFilmsRs = allFilmsPstmt.executeQuery();
 
+    // Récupérer les genres depuis la base de données
+    String getGenresSql = "SELECT idGenre, nom FROM Genre";
+    PreparedStatement getGenresPstmt = conn.prepareStatement(getGenresSql);
+    ResultSet genresRs = getGenresPstmt.executeQuery();
+
     // Afficher les résultats
     while (allFilmsRs.next()) {
         String colonne1 = allFilmsRs.getString("idFilm");
