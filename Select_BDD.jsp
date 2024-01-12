@@ -161,22 +161,24 @@ if (request.getMethod().equalsIgnoreCase("POST")) {
 <%
 // Handling form submission for adding a new film
 if (request.getMethod().equalsIgnoreCase("POST")) {
+    String newFilmIdParam = request.getParameter("newFilmId");
     String newFilmTitle = request.getParameter("newFilmTitle");
     String newFilmYearParam = request.getParameter("newFilmYear");
 
-    if (newFilmTitle != null && !newFilmTitle.isEmpty() && newFilmYearParam != null && !newFilmYearParam.isEmpty()) {
+    if (newFilmIdParam != null && !newFilmIdParam.isEmpty() &&
+        newFilmTitle != null && !newFilmTitle.isEmpty() &&
+        newFilmYearParam != null && !newFilmYearParam.isEmpty()) {
         try {
+            int newFilmId = Integer.parseInt(newFilmIdParam);
             int newFilmYear = Integer.parseInt(newFilmYearParam);
             
             // Specify the columns for the insert statement
-            String insertFilmSql = "INSERT INTO Film (idFilm, titre, année, genre) VALUES (DEFAULT, ?, ?, 'defaultValue')";
+            String insertFilmSql = "INSERT INTO Film (idFilm, titre, année, genre) VALUES (?, ?, ?, 'defaultValue')";
             PreparedStatement insertFilmPstmt = conn.prepareStatement(insertFilmSql);
-            insertFilmPstmt.setString(1, newFilmTitle);
-            insertFilmPstmt.setInt(2, newFilmYear);
+            insertFilmPstmt.setInt(1, newFilmId);
+            insertFilmPstmt.setString(2, newFilmTitle);
+            insertFilmPstmt.setInt(3, newFilmYear);
             
-            // Replace 'defaultValue' with the actual value or retrieve it from the form
-            insertFilmPstmt.setString(3, "defaultValue");
-
             int rowsAffected = insertFilmPstmt.executeUpdate();
 
             if (rowsAffected > 0) {
@@ -187,7 +189,7 @@ if (request.getMethod().equalsIgnoreCase("POST")) {
 
             insertFilmPstmt.close();
         } catch (NumberFormatException e) {
-            out.println("<p>Erreur : Veuillez entrer une année valide.</p>");
+            out.println("<p>Erreur : Veuillez entrer une année ou un ID valide.</p>");
         } catch (SQLException e) {
             out.println("<p>Erreur SQL : " + e.getMessage() + "</p>");
             e.printStackTrace();  // Debugging line
@@ -198,17 +200,19 @@ if (request.getMethod().equalsIgnoreCase("POST")) {
 }
 %>
 
-
-    <p>Créer un formulaire pour saisir un nouveau film dans la base de données</p>
-    <form action="" method="POST">
-        <label for="newFilmTitle">Titre du nouveau film :</label>
-        <input type="text" id="newFilmTitle" name="newFilmTitle" required>
-        <br>
-        <label for="newFilmYear">Année du nouveau film :</label>
-        <input type="text" id="newFilmYear" name="newFilmYear" required>
-        <br>
-        <input type="submit" value="Ajouter le Film">
-    </form>
+<p>Créer un formulaire pour saisir un nouveau film dans la base de données</p>
+<form action="" method="POST">
+    <label for="newFilmId">ID du nouveau film :</label>
+    <input type="text" id="newFilmId" name="newFilmId" required>
+    <br>
+    <label for="newFilmTitle">Titre du nouveau film :</label>
+    <input type="text" id="newFilmTitle" name="newFilmTitle" required>
+    <br>
+    <label for="newFilmYear">Année du nouveau film :</label>
+    <input type="text" id="newFilmYear" name="newFilmYear" required>
+    <br>
+    <input type="submit" value="Ajouter le Film">
+</form>
 
     <%
     conn.close();
