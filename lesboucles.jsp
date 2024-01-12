@@ -76,9 +76,11 @@
 <%-- Boucle for pour afficher un triangle rectangle aligné sur la droite --%>
 <% for (int j = 1; j <= cpt; j++) { %>
     <p>
+    <%-- Espace avant les étoiles --%>
     <% for (int k = 1; k <= cpt - j; k++) { %>
         <%= "&nbsp;" %>
     <% } %>
+    <%-- Étoiles --%>
     <% for (int i = 1; i <= j; i++) { %>
         <%= "*" %>
     <% } %>
