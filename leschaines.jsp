@@ -88,6 +88,7 @@ pluvieux</p>
     <%= chaine.charAt(i) %>
 <% } %>
 
+
 Exemple : L'hiver sera pluvieux</br>
 Lhvrsr lvex</p>
 
