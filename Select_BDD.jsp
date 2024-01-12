@@ -104,18 +104,15 @@ if (searchYearParam != null && !searchYearParam.isEmpty()) {
     <label for="filmId">Sélectionnez un film :</label>
     <select name="filmId" id="filmId">
         <% 
-        // Reuse the code to fetch all films
-        PreparedStatement allFilmsPstmt = conn.prepareStatement("SELECT idFilm, titre FROM Film");
-        ResultSet allFilmsRs = allFilmsPstmt.executeQuery();
+        // Reuse the existing variable for fetching all films
+        allFilmsPstmt = conn.prepareStatement("SELECT idFilm, titre FROM Film");
+        allFilmsRs = allFilmsPstmt.executeQuery();
 
         while (allFilmsRs.next()) {
             int filmId = allFilmsRs.getInt("idFilm");
             String filmTitle = allFilmsRs.getString("titre");
             out.println("<option value='" + filmId + "'>" + filmTitle + "</option>");
         }
-
-        allFilmsRs.close();
-        allFilmsPstmt.close();
         %>
     </select>
     <br>
