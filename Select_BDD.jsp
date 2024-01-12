@@ -21,7 +21,7 @@
     Connection conn = DriverManager.getConnection(url, user, password);
 
     // Exercice : Afficher tous les films de la base de données
-    String allFilmsSql = "SELECT idFilm, titre, année FROM Film";
+    String allFilmsSql = "SELECT idFilm, titre, année FROM Film WHERE année >= 2000";
     PreparedStatement allFilmsPstmt = conn.prepareStatement(allFilmsSql);
     ResultSet allFilmsRs = allFilmsPstmt.executeQuery();
 
